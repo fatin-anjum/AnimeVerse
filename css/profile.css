@@ -1,0 +1,123 @@
+body {
+    font-family: Arial, sans-serif;
+    background: linear-gradient(to right, #1f4037, #99f2c8);
+    margin: 0;
+    padding: 0;
+}
+.pnavbar {
+    background-color: rgba(55, 0, 0, 1);
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 30px;
+    align-items: center;
+}
+
+.pnavbar-left span {
+    font-size: 32px;
+    font-weight: 900;
+    color: #da7000c4;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    background: linear-gradient(45deg, #ff2200, #ff5500, #ff2200);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow:
+        0 0 8px #a08989ff,
+        0 0 15px #9a8a8aff,
+        0 0 25px #ad9393ff,
+        0 0 40px #bba3a3ff,
+        1px 1px 2px #7f5959ff;
+    transition: text-shadow 0.8s ease;
+    cursor: default;
+}
+
+.pnavbar-left span:hover {
+    text-shadow:
+        0 0 12px #472108f5,
+        0 0 20px #472108f5,
+        0 0 35px #472108f5,
+        0 0 50px #472108f5,
+        2px 2px 4px #aa2200;
+}
+
+.pnavbar-right a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.pnavbar-right a:hover {
+    text-decoration: underline;
+    color: #ff4d4d;
+}
+
+.container {
+    background-color: rgba(255,255,255,0.95);
+    max-width: 600px;
+    margin: 60px auto;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+}
+
+h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+label {
+    font-weight: bold;
+    margin-top: 10px;
+    display: block;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+textarea {
+    resize: vertical;
+}
+
+button {
+    background-color: #003f11ff;
+    color: white;
+    padding: 12px;
+    margin-top: 20px;
+    width: 100%;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #00591b;
+}
+
+.danger {
+    background-color: #db0016ff;
+}
+
+.danger:hover {
+    background-color: #a71d2a;
+}
+
+.message {
+    color: green;
+    text-align: center;
+    font-weight: bold;
+}
+
+.error {
+    color: red;
+    text-align: center;
+}
