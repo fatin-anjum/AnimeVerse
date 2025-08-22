@@ -6,8 +6,8 @@ require_once __DIR__ . '/../model/UserModel.php';
 $error = "";
 
 if (isset($_SESSION['user_id'])) {
-    // Already logged in? Redirect to home
-    header("Location: ../controller/homecontroller.php");
+ 
+    header("Location: /Animeverse/index.php?page=home");
     exit();
 }
 
@@ -23,11 +23,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $_SESSION['user_id'] = $user['user_id'];
         $_SESSION['user_name'] = $user['name'];
         $_SESSION['user_email'] = $user['email'];
-        header("Location: ../controller/homecontroller.php");
+
+        
+        header("Location: /Animeverse/index.php?page=home");
         exit();
     } else {
         $error = "Invalid email or password.";
     }
 }
+
 
 require __DIR__ . '/../view/loginview.php';

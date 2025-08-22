@@ -1,6 +1,8 @@
 <?php
 
-$page = $_GET['page'] ?? 'home';
+require_once __DIR__ . "/db.php";
+
+$page = $_GET['page'] ?? 'login';
 
 switch ($page) {
     case 'login':
@@ -14,6 +16,15 @@ switch ($page) {
         break;
     case 'goodbye':
         require __DIR__ . "/controller/goodbyecontroller.php";
+        break;
+    case 'discussion':
+        require __DIR__ . "/controller/discussioncontroller.php";
+        break;
+    case 'polldebate':
+        require __DIR__ . "/controller/polldebatecontroller.php";
+        break;
+    case 'fanart':
+        require __DIR__ . "/controller/fanartcontroller.php";
         break;
     default:
         echo "Page not found.";

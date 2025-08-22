@@ -14,10 +14,10 @@ $model = new UserModel($pdo);
 
 $message = $error = "";
 
-// Fetch current user data
+
 $user = $model->getUserById($user_id);
 
-// Update profile
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['update'])) {
     }
 }
 
-// Change password
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
     $current = $_POST['current_password'];
     $new = $_POST['new_password'];
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['change_password'])) {
     }
 }
 
-// Delete account
+
 if (isset($_POST['disband'])) {
     $model->deleteUser($user_id);
     session_destroy();
@@ -53,6 +53,6 @@ if (isset($_POST['disband'])) {
     exit();
 }
 
-// Load view
+
 require_once __DIR__ . '/../view/profileView.php';
 

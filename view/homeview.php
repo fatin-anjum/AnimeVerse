@@ -10,12 +10,11 @@
             <span>A n i m e V e r s e</span>
         </div>
         <div class="navbar-right">
-            <a href="homecontroller.php">Home</a>
-            <a href="profilecontroller.php">Profile Management</a>
-            <a href="faq.php">FAQ</a>
+            <a href="/Animeverse/controller/profilecontroller.php">Profile Management</a>
+            <a href="/Animeverse/controller/fanartcontroller.php">Fan Arts</a>
             <a href="contact.php">Contact Us</a>
             <?php if ($userEmail): ?>
-                <a href="logoutcontroller.php">Logout</a>
+                <a href="/Animeverse/controller/logoutcontroller.php">Logout</a>
             <?php else: ?>
                 <a href="/Animeverse/controller/logincontroller.php">Login</a>
             <?php endif; ?>
@@ -26,8 +25,8 @@
             <h1>Welcome to AnimeVerse</h1>
             <p>AnimeVerse is the perfect place for people who love anime!</p>
             <div class="hero-buttons">
-                <a href="discussion.php" class="primary">Discussion Channel</a>
-                <a href="art.php" class="primary">Fan Arts</a>
+                <a href="/Animeverse/controller/discussioncontroller.php" class="primary">Discussion Channel</a>
+                <a href="/Animeverse/controller/polldebatecontroller.php" class="primary">Polls & Debates</a>
             </div>
         </div>
     </div>
@@ -66,9 +65,9 @@
                 <a href="contact.php" class="link-button">Contact Us</a>
                 <a href="donor.php" class="link-button">Reviews and Ratings</a>
                 <a href="recipient.php" class="link-button">Polls</a>
-                <a href="faq.php" class="link-button">FAQ</a>
+                <a href="/Animeverse/controller/fanartcontroller.php" class="link-button">Fan Arts</a>
                 <a href="upcoming.php" class="link-button">Upcoming Events</a>
-                <a href="inventory.php" class="link-button">Inventory</a>
+                <a href="/Animeverse/controller/inventorycontroller.php" class="link-button">Inventory</a>
             </div>
         </div>
     </div>
