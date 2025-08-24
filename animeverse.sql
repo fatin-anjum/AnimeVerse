@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 22, 2025 at 11:54 AM
+-- Generation Time: Aug 24, 2025 at 01:32 PM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -84,7 +84,9 @@ CREATE TABLE `debates` (
 --
 
 INSERT INTO `debates` (`debate_id`, `user_id`, `title`, `content`, `created_at`) VALUES
-(7, 24, 'One piece is too long.', 'Not if you enjoy it.', '2025-08-22 09:05:55');
+(7, 24, 'One piece is too long.', 'Not if you enjoy it.', '2025-08-22 09:05:55'),
+(8, 24, 'dwqeqwe', 'ccccc', '2025-08-24 05:51:00'),
+(9, 24, 'aasdasdasd', 'vzzxc', '2025-08-24 06:07:18');
 
 -- --------------------------------------------------------
 
@@ -106,7 +108,9 @@ CREATE TABLE `debate_replies` (
 --
 
 INSERT INTO `debate_replies` (`reply_id`, `debate_id`, `user_id`, `content`, `votes`, `created_at`) VALUES
-(1, 7, 23, 'yes if you are a busy person', 20, '2025-08-22 09:10:57');
+(1, 7, 23, 'yes if you are a busy person', 20, '2025-08-22 09:10:57'),
+(2, 7, 24, 'sdfdfsd', 0, '2025-08-24 05:59:20'),
+(3, 9, 24, 'sdasd', 0, '2025-08-24 06:07:23');
 
 -- --------------------------------------------------------
 
@@ -126,7 +130,8 @@ CREATE TABLE `debate_reply_votes` (
 --
 
 INSERT INTO `debate_reply_votes` (`id`, `reply_id`, `user_id`, `vote`) VALUES
-(1, 1, 23, 1);
+(1, 1, 23, 1),
+(2, 1, 24, -1);
 
 -- --------------------------------------------------------
 
@@ -149,7 +154,8 @@ CREATE TABLE `fanart` (
 --
 
 INSERT INTO `fanart` (`fanart_id`, `user_id`, `title`, `description`, `filename`, `file_path`, `created_at`) VALUES
-(1, 23, 'Gojo Satorou', '', 'fanart_68a83dbd4c3f4.jpg', '', '2025-08-22 09:51:57');
+(5, 23, 'gojo', '', 'fanart_68a83ffa00d40.jpg', 'uploads/fanart_68a83ffa00d40.jpg', '2025-08-22 10:01:30'),
+(12, 24, 'adfasf', '', 'fanart_68aaab57dc77e.jpg', '', '2025-08-24 06:04:07');
 
 -- --------------------------------------------------------
 
@@ -165,6 +171,15 @@ CREATE TABLE `fanart_comments` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+--
+-- Dumping data for table `fanart_comments`
+--
+
+INSERT INTO `fanart_comments` (`comment_id`, `fanart_id`, `user_id`, `comment`, `created_at`) VALUES
+(2, 5, 24, 'great job!', '2025-08-22 12:08:46'),
+(3, 5, 24, 'qweqweq', '2025-08-24 05:56:21'),
+(4, 12, 24, 'adasdasd', '2025-08-24 06:04:33');
+
 -- --------------------------------------------------------
 
 --
@@ -177,6 +192,14 @@ CREATE TABLE `fanart_hearts` (
   `user_id` int(11) NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `fanart_hearts`
+--
+
+INSERT INTO `fanart_hearts` (`heart_id`, `fanart_id`, `user_id`, `created_at`) VALUES
+(5, 5, 23, '2025-08-22 10:04:24'),
+(6, 5, 24, '2025-08-22 10:14:11');
 
 -- --------------------------------------------------------
 
@@ -250,7 +273,9 @@ INSERT INTO `genre_discussions` (`discussion_id`, `genre_id`, `user_id`, `title`
 (1, 1, 23, 'Do u think Tanjiro shouldve just left nezuko?', 'In my opinion, the anime wouldnt exist if that happened.', '2025-08-22 07:50:39'),
 (2, 3, 24, 'Sakamoto days', 'Sakamoto needs to get his prime look back.', '2025-08-22 08:00:40'),
 (3, 3, 24, 'School babysitters', 'This is good anime for time passing.', '2025-08-22 08:01:59'),
-(4, 3, 24, 'School babysitters', 'This is good anime for time passing.', '2025-08-22 08:17:26');
+(4, 3, 24, 'School babysitters', 'This is good anime for time passing.', '2025-08-22 08:17:26'),
+(5, 2, 24, 'qweqwe', 'sssssd', '2025-08-24 05:57:34'),
+(6, 4, 24, 'qeqwewq', 'asdasds', '2025-08-24 06:05:34');
 
 -- --------------------------------------------------------
 
@@ -272,7 +297,10 @@ CREATE TABLE `polls` (
 
 INSERT INTO `polls` (`poll_id`, `title`, `description`, `created_by`, `created_at`) VALUES
 (1, 'The best among these 3', 'shounen', 24, '2025-08-22 08:59:17'),
-(2, 'is baki strong enough?', '', 24, '2025-08-22 08:59:53');
+(2, 'is baki strong enough?', '', 24, '2025-08-22 08:59:53'),
+(3, 'qweqweq', '', 24, '2025-08-24 05:50:46'),
+(4, 'qewqwe', '', 24, '2025-08-24 05:58:22'),
+(5, 'xcvxccx', '', 24, '2025-08-24 06:06:08');
 
 -- --------------------------------------------------------
 
@@ -295,7 +323,17 @@ INSERT INTO `poll_options` (`option_id`, `poll_id`, `option_text`) VALUES
 (2, 1, 'Naruto'),
 (3, 1, 'Bleach'),
 (4, 2, 'Yes'),
-(5, 2, 'No');
+(5, 2, 'No'),
+(6, 3, '1'),
+(7, 3, '2'),
+(8, 3, '3'),
+(9, 4, 'sd'),
+(10, 4, 'gdg'),
+(11, 4, 'ada'),
+(12, 5, 'adasd'),
+(13, 5, 'fdfd'),
+(14, 5, 'bvbvb'),
+(15, 5, 'cvcvxc');
 
 -- --------------------------------------------------------
 
@@ -375,7 +413,9 @@ CREATE TABLE `thread_replies` (
 --
 
 INSERT INTO `thread_replies` (`reply_id`, `discussion_id`, `user_id`, `content`, `replied_at`) VALUES
-(1, 1, 24, 'True that.', '2025-08-22 07:58:28');
+(1, 1, 24, 'True that.', '2025-08-22 07:58:28'),
+(2, 5, 24, 'adasd', '2025-08-24 05:57:45'),
+(3, 4, 24, 'adadas', '2025-08-24 06:05:10');
 
 -- --------------------------------------------------------
 
@@ -576,37 +616,37 @@ ALTER TABLE `collectibles`
 -- AUTO_INCREMENT for table `debates`
 --
 ALTER TABLE `debates`
-  MODIFY `debate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `debate_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `debate_replies`
 --
 ALTER TABLE `debate_replies`
-  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `debate_reply_votes`
 --
 ALTER TABLE `debate_reply_votes`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `fanart`
 --
 ALTER TABLE `fanart`
-  MODIFY `fanart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `fanart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `fanart_comments`
 --
 ALTER TABLE `fanart_comments`
-  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `comment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `fanart_hearts`
 --
 ALTER TABLE `fanart_hearts`
-  MODIFY `heart_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `heart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `fan_art`
@@ -624,19 +664,19 @@ ALTER TABLE `genres`
 -- AUTO_INCREMENT for table `genre_discussions`
 --
 ALTER TABLE `genre_discussions`
-  MODIFY `discussion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `discussion_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `polls`
 --
 ALTER TABLE `polls`
-  MODIFY `poll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `poll_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `poll_options`
 --
 ALTER TABLE `poll_options`
-  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `option_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `reviews`
@@ -654,7 +694,7 @@ ALTER TABLE `thread_likes`
 -- AUTO_INCREMENT for table `thread_replies`
 --
 ALTER TABLE `thread_replies`
-  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `reply_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `users`
