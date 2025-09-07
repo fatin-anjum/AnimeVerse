@@ -1,17 +1,21 @@
 <?php
-session_start();
 require_once __DIR__ . '/../model/HomeModel.php';
 
+class HomeController {
+    private $pdo;
 
-if (!isset($_SESSION['user_id'])) {
-    header("Location: /Animeverse/index.php?page=login");
-    exit();
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+    }
+
+    public function index() {
+        // Check if user is logged in, but don't force redirect for home page
+        $userEmail = $_SESSION['user_email'] ?? null;
+        
+        $model = new HomeModel();
+        $inventoryCount = $model->getInventoryCount();
+        
+        // Load the home view
+        require_once __DIR__ . '/../view/homeview.php';
+    }
 }
-
-$model = new HomeModel();
-
-$userEmail = $_SESSION['user_email'] ?? null;
-$inventoryCount = $model->getInventoryCount();
-
-
-require_once __DIR__ . '/../view/homeview.php';

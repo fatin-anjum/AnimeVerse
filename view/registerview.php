@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>Register - AnimeVerse</title>
-    <link rel="stylesheet" href="../css/register.css">
+    <link rel="stylesheet" href="/Animeverse/css/register.css">
 </head>
 <body>
 <div class="register-box">
@@ -17,7 +17,7 @@
         <input type="password" name="confirm" placeholder="Confirm Password" required>
         <button type="submit">Register</button>
     </form>
-    <p>Already registered? <a href="/Animeverse/controller/logincontroller.php">Log in here</a>.</p>
+    <p>Already registered? <a href="?page=login">Log in here</a>.</p>
 </div>
 </body>
 </html>

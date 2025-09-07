@@ -1,148 +1,630 @@
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(to bottom, #f0f2f5, #e4e7eb);
+/* Modern Fan Art CSS */
+* {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #8B4513 0%, #A0522D 50%, #D2691E 100%);
+    min-height: 100vh;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Navigation Bar */
+.navbar {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-left span {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: linear-gradient(45deg, #8B4513, #D2691E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+.navbar-right {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+
+.navbar-right a {
+    color: #333;
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.navbar-right a:hover,
+.navbar-right a.active {
+    background: linear-gradient(45deg, #8B4513, #D2691E);
+    color: white;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(139, 69, 19, 0.4);
+}
+
+/* Container */
+.fanart-container {
+    max-width: 1400px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+/* Page Header */
+.page-header {
+    background: rgba(255, 255, 255, 0.95);
+    backdrop-filter: blur(10px);
+    text-align: center;
+    padding: 3rem 2rem;
+    border-radius: 20px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     color: #333;
 }
 
-.navbar {
-    background: rgba(55, 0, 0, 1);
-    padding: 15px 30px;
+.page-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+    background: linear-gradient(45deg, #8B4513, #D2691E);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
     display: flex;
-    gap: 25px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
 }
 
-.navbar a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    padding: 5px 10px;
-    border-radius: 5px;
-    transition: background 0.3s, transform 0.3s;
+.page-header p {
+    font-size: 1.2rem;
+    color: #666;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-.navbar a:hover {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.05);
-}
-
-.container {
-    max-width: 900px;
-    margin: 30px auto;
-    background-color: #fff;
-    padding: 30px;
+/* Alert Messages */
+.alert {
+    padding: 15px 20px;
+    margin-bottom: 20px;
     border-radius: 12px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    backdrop-filter: blur(10px);
 }
 
-.message {
-    color: rgb(118, 0, 0);
-    font-weight: bold;
-    margin-bottom: 15px;
-    text-align: center;
-}
-
-form input[type="text"],
-form textarea,
-form input[type="file"],
-form button {
-    display: block;
-    width: 100%;
-    margin-bottom: 15px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    transition: border 0.3s, box-shadow 0.3s;
-}
-
-form input[type="text"]:focus,
-form textarea:focus,
-form input[type="file"]:focus {
-    border-color: #230c0c;
-    box-shadow: 0 0 8px rgba(139, 0, 0, 0.4);
-    outline: none;
-}
-
-form button {
-    background: #491212;
+.alert.success {
+    background: rgba(46, 160, 67, 0.9);
     color: white;
+    border-left: 4px solid #2ea043;
+}
+
+.alert.error {
+    background: rgba(218, 54, 51, 0.9);
+    color: white;
+    border-left: 4px solid #da3633;
+}
+
+/* Content Grid */
+.content-grid {
+    display: grid;
+    grid-template-columns: 350px 1fr;
+    gap: 2rem;
+    align-items: start;
+}
+
+@media (max-width: 1200px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .upload-sidebar {
+        order: -1;
+    }
+}
+
+/* Upload Sidebar */
+.upload-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.upload-section {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.upload-section h2 {
+    color: #333;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.upload-section i {
+    color: #8B4513;
+}
+
+/* Form Styles */
+.upload-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.form-group label {
+    font-weight: 600;
+    color: #333;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.form-group i {
+    color: #8B4513;
+    width: 16px;
+}
+
+.upload-form input[type="text"],
+.upload-form textarea,
+.upload-form input[type="file"] {
+    padding: 12px 16px;
+    border: 2px solid #e1e5e9;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    background: #fafbfc;
+}
+
+.upload-form input[type="text"]:focus,
+.upload-form textarea:focus,
+.upload-form input[type="file"]:focus {
+    outline: none;
+    border-color: #667eea;
+    background: white;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.upload-form textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+/* Button Styles */
+.btn {
+    padding: 12px 24px;
     border: none;
+    border-radius: 10px;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
     cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
+    font-size: 1rem;
 }
 
-form button:hover {
-    background: #550000;
+.btn-primary {
+    background: linear-gradient(45deg, #667eea, #764ba2);
+    color: white;
+}
+
+.btn-primary:hover {
     transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
 }
 
+.btn-heart {
+    background: #ff6b6b;
+    color: white;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-heart:hover {
+    background: #ff5252;
+    transform: translateY(-1px);
+}
+
+.btn-danger {
+    background: #dc3545;
+    color: white;
+    padding: 8px 16px;
+    font-size: 0.9rem;
+}
+
+.btn-danger:hover {
+    background: #c82333;
+    transform: translateY(-1px);
+}
+
+.btn-comment {
+    background: #667eea;
+    color: white;
+    padding: 8px 12px;
+    border-radius: 8px;
+}
+
+.btn-comment:hover {
+    background: #5a6fd8;
+}
+
+/* Main Gallery */
+.main-gallery {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.gallery-section h2 {
+    color: #333;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.5rem;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+}
+
+.gallery-section i {
+    color: #667eea;
+}
+
+/* Fan Art Grid */
+.fanart-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+@media (max-width: 768px) {
+    .fanart-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+}
+
+/* Fan Art Cards */
 .fanart-card {
-    border: none;
-    padding: 20px;
-    margin-bottom: 25px;
-    border-radius: 12px;
-    background-color: #fff0f0;
-    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s, box-shadow 0.3s;
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e1e5e9;
 }
 
 .fanart-card:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    transform: translateY(-5px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
 }
 
-.fanart-card img {
+.card-header {
+    padding: 1.5rem 1.5rem 1rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.artwork-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.artwork-info h3 {
+    color: #333;
+    font-size: 1.2rem;
+    margin: 0;
+    flex: 1;
+}
+
+.artist-info {
+    display: flex;
+    align-items: center;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.artist-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Artwork Display */
+.artwork-display {
+    position: relative;
+    width: 100%;
+    min-height: 250px;
+    max-height: 400px;
+    overflow: hidden;
+    background: #f8f9fa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.artwork-display img {
     max-width: 100%;
+    max-height: 100%;
+    width: auto;
     height: auto;
-    margin-bottom: 15px;
+    object-fit: contain;
+    image-rendering: auto;
+    -ms-interpolation-mode: bicubic;
+    transition: transform 0.3s ease;
+}
+
+.fanart-card:hover .artwork-display img {
+    transform: scale(1.05);
+}
+
+.no-image {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #999;
+    height: 100%;
+    min-height: 200px;
+    background: #f8f9fa;
+}
+
+.no-image i {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.image-fallback {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    background: #f8f9fa;
+}
+
+/* Artwork Description */
+.artwork-description {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.artwork-description p {
+    color: #666;
+    line-height: 1.5;
+    margin: 0;
+}
+
+/* Card Actions */
+.card-actions {
+    padding: 1rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.action-form {
+    display: inline-flex;
+}
+
+/* Comments Section */
+.comments-section {
+    padding: 1.5rem;
+}
+
+.comments-section h4 {
+    color: #333;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.comments-section i {
+    color: #667eea;
+}
+
+.comments-list {
+    margin-bottom: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.comment-item {
+    padding: 0.75rem;
+    background: #f8f9fa;
     border-radius: 8px;
-    border: 1px solid #ccc;
+    margin-bottom: 0.5rem;
 }
 
-.inline-form {
+.comment-author {
+    font-weight: 600;
+    color: #667eea;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.9rem;
+}
+
+.comment-text {
+    color: #555;
+    margin: 0;
+    line-height: 1.4;
+}
+
+.no-comments {
+    color: #999;
+    font-style: italic;
+    text-align: center;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+/* Comment Form */
+.comment-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.comment-input {
+    display: flex;
+    gap: 0.5rem;
+    width: 100%;
+}
+
+.comment-input input {
+    flex: 1;
+    padding: 10px 14px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    transition: border-color 0.3s ease;
+}
+
+.comment-input input:focus {
+    outline: none;
+    border-color: #667eea;
+}
+
+/* No Content State */
+.no-content {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.no-content i {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+}
+
+.no-content h3 {
+    margin-bottom: 1rem;
+    color: #333;
+}
+
+.no-content p {
+    color: #999;
+    font-size: 1.1rem;
+}
+
+/* Content ID Styling */
+.content-id {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 4px 12px;
+    border-radius: 15px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     display: inline-block;
-    margin-right: 10px;
+    box-shadow: 0 2px 4px rgba(102, 126, 234, 0.3);
 }
 
-.inline-form button {
-    background-color: #ff4d4d;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
+/* Responsive Design */
+@media (max-width: 768px) {
+    .fanart-container {
+        padding: 0 0.5rem;
+        margin: 1rem auto;
+    }
+    
+    .page-header {
+        padding: 2rem 1rem;
+    }
+    
+    .page-header h1 {
+        font-size: 2rem;
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .upload-section,
+    .main-gallery {
+        padding: 1.5rem;
+    }
+    
+    .card-actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+    
+    .artwork-info {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
 }
 
-.inline-form button:hover {
-    background-color: #370808;
-    transform: scale(1.05);
-}
-
-.delete-btn {
-    background-color: #ff3333;
-    color: white;
-    border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.3s, transform 0.2s;
-}
-
-.delete-btn:hover {
-    background-color: #b20000;
-    transform: scale(1.05);
-}
-
-h1, h2, h3 {
-    color: #2b0505;
-}
-
-textarea {
-    min-height: 80px;
+@media (max-width: 480px) {
+    .page-header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .fanart-grid {
+        gap: 1rem;
+    }
+    
+    .artwork-display {
+        min-height: 200px;
+        max-height: 350px;
+    }
+    
+    .fanart-card {
+        margin-bottom: 1rem;
+    }
 }

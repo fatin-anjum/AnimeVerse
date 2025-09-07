@@ -12,7 +12,7 @@
         <?php else: ?>
             <p>You have been logged out.</p>
         <?php endif; ?>
-        <a href="/Animeverse/controller/registercontroller.php">Rejoin AnimeVerse</a>
+        <a href="?page=register">Rejoin AnimeVerse</a>
     </div>
 </body>
 </html>

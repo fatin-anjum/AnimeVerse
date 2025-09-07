@@ -1,6 +1,4 @@
 <?php
-session_start();
-
 class GoodbyeController {
     public function index() {
         // Pass variable to view depending on query parameter
@@ -16,7 +14,3 @@ class GoodbyeController {
         include __DIR__ . '/../view/goodbyeView.php';
     }
 }
-
-// Run controller
-$controller = new GoodbyeController();
-$controller->index();

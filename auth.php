@@ -4,6 +4,6 @@ if (session_status() === PHP_SESSION_NONE) {
 }
 
 if (!isset($_SESSION['user_id'])) {
-    header("Location: ../controller/logincontroller.php"); // Adjust path if needed
+    header("Location: index.php?page=login");
     exit();
 }

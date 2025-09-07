@@ -1,32 +1,41 @@
 <?php
-session_start();
-require_once __DIR__ . '/../db.php';
 require_once __DIR__ . '/../model/UserModel.php';
 
-$error = "";
-$model = new UserModel($pdo);
+class RegisterController {
+    private $pdo;
+    private $model;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = $_POST['password'];
-    $confirm = $_POST['confirm'];
+    public function __construct($pdo) {
+        $this->pdo = $pdo;
+        $this->model = new UserModel($pdo);
+    }
 
-    if ($password !== $confirm) {
-        $error = "Passwords do not match.";
-    } elseif ($model->usernameExists($username)) {
-        $error = "Username already taken.";
-    } elseif ($model->emailExists($email)) {
-        $error = "Email already registered.";
-    } else {
-        $hash = password_hash($password, PASSWORD_DEFAULT);
-        if ($model->registerUser($username, $email, $hash)) {
-            header("Location: ../controller/logincontroller.php?registered=1");
-            exit();
-        } else {
-            $error = "Registration failed. Please try again.";
+    public function index() {
+        $error = "";
+
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $username = trim($_POST['username']);
+            $email = trim($_POST['email']);
+            $password = $_POST['password'];
+            $confirm = $_POST['confirm'];
+
+            if ($password !== $confirm) {
+                $error = "Passwords do not match.";
+            } elseif ($this->model->usernameExists($username)) {
+                $error = "Username already taken.";
+            } elseif ($this->model->emailExists($email)) {
+                $error = "Email already registered.";
+            } else {
+                $hash = password_hash($password, PASSWORD_DEFAULT);
+                if ($this->model->registerUser($username, $email, $hash)) {
+                    header("Location: ?page=login&registered=1");
+                    exit();
+                } else {
+                    $error = "Registration failed. Please try again.";
+                }
+            }
         }
+
+        require_once __DIR__ . '/../view/registerView.php';
     }
 }
-
-require_once __DIR__ . '/../view/registerView.php';

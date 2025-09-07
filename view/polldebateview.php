@@ -6,118 +6,139 @@ $activeTab = $_POST['active_tab'] ?? 'poll';
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Poll & Debate</title>
-    <link rel="stylesheet" href="/animeverse/css/polldebate.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Polls & Debates - AnimeVerse</title>
+    <link rel="stylesheet" href="css/polldebate.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
+    <!-- Navigation Bar -->
     <nav class="navbar">
         <div class="navbar-left">
-            <a href="/animeverse/controller/homecontroller.php">Home</a>
+            <span>AnimeVerse</span>
         </div>
         <div class="navbar-right">
+            <a href="?page=home"><i class="fas fa-home"></i> Home</a>
+            <a href="?page=myprofile"><i class="fas fa-user"></i> My Profile</a>
+            <a href="?page=fanart"><i class="fas fa-palette"></i> Fan Art</a>
+            <a href="?page=discussion"><i class="fas fa-comments"></i> Discussions</a>
+            <a href="?page=polldebate" class="active"><i class="fas fa-chart-bar"></i> Polls</a>
+            <a href="?page=debate"><i class="fas fa-balance-scale"></i> Debates</a>
+            <a href="?page=collectibles"><i class="fas fa-shopping-cart"></i> Marketplace</a>
+            <a href="?page=badge"><i class="fas fa-trophy"></i> Badges</a>
+            <a href="?page=follow"><i class="fas fa-users"></i> Social</a>
+            <a href="?page=animereview"><i class="fas fa-star"></i> Reviews</a>
             <?php if(isset($_SESSION['user_id'])): ?>
-                <a href="/animeverse/controller/profilecontroller.php">Profile</a>
-                <a href="/animeverse/controller/logoutcontroller.php">Logout</a>
+                <a href="?page=logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
             <?php else: ?>
-                <a href="/animeverse/controller/logincontroller.php">Login</a>
+                <a href="?page=login"><i class="fas fa-sign-in-alt"></i> Login</a>
             <?php endif; ?>
         </div>
     </nav>
 
-    <div class="container">
-        <h1>Poll & Debate Channel</h1>
+    <div class="polldebate-container">
+        <!-- Page Header -->
+        <header class="page-header">
+            <h1><i class="fas fa-chart-bar"></i> Anime Polls</h1>
+            <p>Vote on anime-related polls and see what the community thinks</p>
+        </header>
 
         <?php if(!empty($message)): ?>
-            <p class="message"><?= htmlspecialchars($message) ?></p>
+            <div class="alert success">
+                <i class="fas fa-check-circle"></i>
+                <?= htmlspecialchars($message) ?>
+            </div>
         <?php endif; ?>
 
-      
-        <div class="tabs">
-            <button class="tablink <?= $activeTab=='poll'?'active':'' ?>" onclick="showTab('poll')">Polls</button>
-            <button class="tablink <?= $activeTab=='debate'?'active':'' ?>" onclick="showTab('debate')">Debates</button>
+        <!-- Navigation to Debates -->
+        <div class="tab-navigation">
+            <button class="tab-link active">
+                <i class="fas fa-chart-bar"></i> Polls
+            </button>
+            <a href="?page=debate" class="tab-link">
+                <i class="fas fa-balance-scale"></i> Debates
+            </a>
         </div>
 
-        <div id="poll" class="tabcontent" style="display: <?= $activeTab=='poll'?'block':'none' ?>;">
-            <h2>Create Poll</h2>
-            <form method="post">
-                <input type="hidden" name="active_tab" value="poll">
-                <input type="text" name="poll_title" placeholder="Poll Title" required><br>
-                <textarea name="poll_desc" placeholder="Description"></textarea><br>
-                <?php for($i=1;$i<=$model->getMaxOptions();$i++): ?>
-                    <input type="text" name="poll_options[]" placeholder="Option <?= $i ?>" <?= $i<=2?'required':'' ?>><br>
-                <?php endfor; ?>
-                <button type="submit">Create Poll</button>
-            </form>
-
-            <h2>Polls</h2>
-            <?php foreach($polls as $poll): ?>
-                <div class="poll">
-                    <h3><?= htmlspecialchars($poll['title']) ?></h3>
-                    <p><?= htmlspecialchars($poll['description']) ?></p>
-                    <form method="post">
-                        <input type="hidden" name="active_tab" value="poll">
-                        <?php foreach($model->getPollOptions($poll['poll_id']) as $opt): ?>
-                            <button type="submit" name="vote_option" value="<?= $opt['option_id'] ?>">
-                                <?= htmlspecialchars($opt['option_text']) ?> (<?= $model->getPollVotes($opt['option_id']) ?>)
-                            </button>
-                        <?php endforeach; ?>
-                    </form>
-                    <p class="creator">Created by: <?= htmlspecialchars($poll['username']) ?></p>
-                </div>
-            <?php endforeach; ?>
-        </div>
-
-       
-        <div id="debate" class="tabcontent" style="display: <?= $activeTab=='debate'?'block':'none' ?>;">
-            <h2>Create Debate</h2>
-            <form method="post">
-                <input type="hidden" name="active_tab" value="debate">
-                <input type="text" name="debate_title" placeholder="Debate Topic" required><br>
-                <textarea name="debate_content" placeholder="Your argument" required></textarea><br>
-                <button type="submit">Create Debate</button>
-            </form>
-
-            <h2>Debates</h2>
-            <?php foreach($debates as $debate): ?>
-                <div class="debate">
-                    <h3><?= htmlspecialchars($debate['title']) ?></h3>
-                    <p><?= htmlspecialchars($debate['content']) ?> - <em><?= htmlspecialchars($debate['username']) ?></em></p>
-                    
-                    <?php $replies = $model->getDebateReplies($debate['debate_id']); ?>
-                    <div class="replies">
-                        <?php foreach($replies as $rep): ?>
-                            <div class="reply">
-                                <p><?= htmlspecialchars($rep['content']) ?> - <strong><?= htmlspecialchars($rep['username']) ?></strong> (Votes: <?= $rep['votes'] ?>)</p>
-                                <form method="post" class="inline-form">
-                                    <input type="hidden" name="active_tab" value="debate">
-                                    <input type="hidden" name="vote_reply_id" value="<?= $rep['reply_id'] ?>">
-                                    <button type="submit" name="vote_type" value="up">👍</button>
-                                    <button type="submit" name="vote_type" value="down">👎</button>
-                                </form>
+        <!-- Polls Section -->
+        <div class="content-grid">
+                <!-- Create Poll Sidebar -->
+                <aside class="create-sidebar">
+                    <section class="create-section">
+                        <h2><i class="fas fa-plus-circle"></i> Create Poll</h2>
+                        <form method="post" class="create-form">
+                            <input type="hidden" name="active_tab" value="poll">
+                            <div class="form-group">
+                                <label for="poll_title"><i class="fas fa-heading"></i> Poll Title</label>
+                                <input type="text" name="poll_title" id="poll_title" placeholder="Enter poll title" required>
                             </div>
-                        <?php endforeach; ?>
-                    </div>
+                            <div class="form-group">
+                                <label for="poll_desc"><i class="fas fa-align-left"></i> Description</label>
+                                <textarea name="poll_desc" id="poll_desc" placeholder="Describe your poll" rows="3"></textarea>
+                            </div>
+                            <div class="options-group">
+                                <label><i class="fas fa-list"></i> Options</label>
+                                <?php for($i=1;$i<=$model->getMaxOptions();$i++): ?>
+                                    <input type="text" name="poll_options[]" placeholder="Option <?= $i ?>" <?= $i<=2?'required':'' ?>>
+                                <?php endfor; ?>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-plus"></i> Create Poll
+                            </button>
+                        </form>
+                    </section>
+                </aside>
 
-                    <form method="post">
-                        <input type="hidden" name="active_tab" value="debate">
-                        <input type="hidden" name="debate_id" value="<?= $debate['debate_id'] ?>">
-                        <textarea name="debate_reply_content" placeholder="Add your reply" required></textarea>
-                        <button type="submit">Reply</button>
-                    </form>
-                </div>
-            <?php endforeach; ?>
+                <!-- Polls List -->
+                <main class="main-content">
+                    <section class="polls-section">
+                        <h2><i class="fas fa-chart-pie"></i> Active Polls</h2>
+                        <?php if (!empty($polls)): ?>
+                            <div class="polls-grid">
+                                <?php foreach($polls as $poll): ?>
+                                    <article class="poll-card">
+                                        <div class="poll-header">
+                                            <h3><?= htmlspecialchars($poll['title']) ?></h3>
+                                            <span class="content-id">Poll ID: <?= $poll['poll_id'] ?></span>
+                                        </div>
+                                        
+                                        <?php if(!empty($poll['description'])): ?>
+                                            <div class="poll-description">
+                                                <p><?= htmlspecialchars($poll['description']) ?></p>
+                                            </div>
+                                        <?php endif; ?>
+                                        
+                                        <div class="poll-options">
+                                            <form method="post" class="vote-form">
+                                                <input type="hidden" name="active_tab" value="poll">
+                                                <?php foreach($model->getPollOptions($poll['poll_id']) as $opt): ?>
+                                                    <button type="submit" name="vote_option" value="<?= $opt['option_id'] ?>" class="option-btn">
+                                                        <span class="option-text"><?= htmlspecialchars($opt['option_text']) ?></span>
+                                                        <span class="vote-count"><?= $model->getPollVotes($opt['option_id']) ?> votes</span>
+                                                    </button>
+                                                <?php endforeach; ?>
+                                            </form>
+                                        </div>
+                                        
+                                        <div class="poll-footer">
+                                            <span class="creator">
+                                                <i class="fas fa-user"></i> <?= htmlspecialchars($poll['username']) ?>
+                                            </span>
+                                        </div>
+                                    </article>
+                                <?php endforeach; ?>
+                            </div>
+                        <?php else: ?>
+                            <div class="no-content">
+                                <i class="fas fa-poll"></i>
+                                <h3>No Polls Yet</h3>
+                                <p>Be the first to create a poll!</p>
+                            </div>
+                        <?php endif; ?>
+                    </section>
+                </main>
+            </div>
         </div>
     </div>
-
-<script>
-function showTab(tabName) {
-    const tabs = document.getElementsByClassName('tabcontent');
-    for(let t of tabs) t.style.display='none';
-    const links = document.getElementsByClassName('tablink');
-    for(let l of links) l.classList.remove('active');
-    document.getElementById(tabName).style.display='block';
-    event.currentTarget.classList.add('active');
-}
-</script>
 </body>
 </html>
