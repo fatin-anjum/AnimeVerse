@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Quality Test - AnimeVerse</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        .test-container { max-width: 1000px; margin: 0 auto; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 20px 0; }
+        .test-card { background: white; border-radius: 10px; overflow: hidden; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        .test-image { height: 200px; background: #f0f0f0; display: flex; align-items: center; justify-content: center; position: relative; }
+        .test-image img { width: 100%; height: 100%; object-fit: cover; image-rendering: auto; }
+        .test-info { padding: 15px; }
+        .status { padding: 5px 10px; border-radius: 5px; font-size: 12px; font-weight: bold; }
+        .status.success { background: #d4edda; color: #155724; }
+        .status.error { background: #f8d7da; color: #721c24; }
+        .status.loading { background: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🖼️ Anime Image Quality Test</h1>
+        <p>Testing high-quality anime cover images from the database.</p>
+        
+        <div class="test-grid">
+            <!-- Test with actual database URLs -->
+            <div class="test-card">
+                <div class="test-image">
+                    <img src="https://cdn.myanimelist.net/images/anime/10/47347l.jpg" 
+                         alt="Attack on Titan"
+                         onload="this.parentNode.nextElementSibling.querySelector('.status').className='status success'; this.parentNode.nextElementSibling.querySelector('.status').textContent='✅ Loaded Successfully';"
+                         onerror="this.parentNode.nextElementSibling.querySelector('.status').className='status error'; this.parentNode.nextElementSibling.querySelector('.status').textContent='❌ Failed to Load';">
+                </div>
+                <div class="test-info">
+                    <h3>Attack on Titan</h3>
+                    <p><strong>URL:</strong> ...47347l.jpg</p>
+                    <div class="status loading">🔄 Loading...</div>
+                </div>
+            </div>
+            
+            <div class="test-card">
+                <div class="test-image">
+                    <img src="https://cdn.myanimelist.net/images/anime/1286/99889l.jpg" 
+                         alt="Demon Slayer"
+                         onload="this.parentNode.nextElementSibling.querySelector('.status').className='status success'; this.parentNode.nextElementSibling.querySelector('.status').textContent='✅ Loaded Successfully';"
+                         onerror="this.parentNode.nextElementSibling.querySelector('.status').className='status error'; this.parentNode.nextElementSibling.querySelector('.status').textContent='❌ Failed to Load';">
+                </div>
+                <div class="test-info">
+                    <h3>Demon Slayer</h3>
+                    <p><strong>URL:</strong> ...99889l.jpg</p>
+                    <div class="status loading">🔄 Loading...</div>
+                </div>
+            </div>
+            
+            <div class="test-card">
+                <div class="test-image">
+                    <img src="https://cdn.myanimelist.net/images/anime/6/73245l.jpg" 
+                         alt="One Piece"
+                         onload="this.parentNode.nextElementSibling.querySelector('.status').className='status success'; this.parentNode.nextElementSibling.querySelector('.status').textContent='✅ Loaded Successfully';"
+                         onerror="this.parentNode.nextElementSibling.querySelector('.status').className='status error'; this.parentNode.nextElementSibling.querySelector('.status').textContent='❌ Failed to Load';">
+                </div>
+                <div class="test-info">
+                    <h3>One Piece</h3>
+                    <p><strong>URL:</strong> ...73245l.jpg</p>
+                    <div class="status loading">🔄 Loading...</div>
+                </div>
+            </div>
+            
+            <div class="test-card">
+                <div class="test-image">
+                    <img src="https://cdn.myanimelist.net/images/anime/10/78745l.jpg" 
+                         alt="My Hero Academia"
+                         onload="this.parentNode.nextElementSibling.querySelector('.status').className='status success'; this.parentNode.nextElementSibling.querySelector('.status').textContent='✅ Loaded Successfully';"
+                         onerror="this.parentNode.nextElementSibling.querySelector('.status').className='status error'; this.parentNode.nextElementSibling.querySelector('.status').textContent='❌ Failed to Load';">
+                </div>
+                <div class="test-info">
+                    <h3>My Hero Academia</h3>
+                    <p><strong>URL:</strong> ...78745l.jpg</p>
+                    <div class="status loading">🔄 Loading...</div>
+                </div>
+            </div>
+            
+            <div class="test-card">
+                <div class="test-image">
+                    <img src="https://cdn.myanimelist.net/images/anime/9/9453l.jpg" 
+                         alt="Death Note"
+                         onload="this.parentNode.nextElementSibling.querySelector('.status').className='status success'; this.parentNode.nextElementSibling.querySelector('.status').textContent='✅ Loaded Successfully';"
+                         onerror="this.parentNode.nextElementSibling.querySelector('.status').className='status error'; this.parentNode.nextElementSibling.querySelector('.status').textContent='❌ Failed to Load';">
+                </div>
+                <div class="test-info">
+                    <h3>Death Note</h3>
+                    <p><strong>URL:</strong> ...9453l.jpg</p>
+                    <div class="status loading">🔄 Loading...</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 30px;">
+            <h3>Image Quality Information:</h3>
+            <ul>
+                <li><strong>Resolution:</strong> High-quality versions using 'l' suffix (large)</li>
+                <li><strong>Source:</strong> MyAnimeList CDN (reliable and fast)</li>
+                <li><strong>Format:</strong> JPEG optimized for web</li>
+                <li><strong>Rendering:</strong> Optimized for crisp display</li>
+                <li><strong>Fallback:</strong> Graceful error handling with clear messages</li>
+            </ul>
+            
+            <h3>Test Results:</h3>
+            <div id="summary" style="margin-top: 10px; padding: 10px; background: #f8f9fa; border-radius: 5px;">
+                <em>Loading images...</em>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Count loaded images after a delay
+        setTimeout(() => {
+            const successCount = document.querySelectorAll('.status.success').length;
+            const errorCount = document.querySelectorAll('.status.error').length;
+            const total = 5;
+            
+            document.getElementById('summary').innerHTML = `
+                <strong>Summary:</strong><br>
+                ✅ Successfully loaded: ${successCount}/${total} images<br>
+                ❌ Failed to load: ${errorCount}/${total} images<br>
+                <br>
+                ${successCount === total ? 
+                    '<span style="color: green;">🎉 All images loaded successfully! No pixelation issues expected.</span>' : 
+                    '<span style="color: orange;">⚠️ Some images failed to load. Check network connectivity.</span>'
+                }
+            `;
+        }, 3000);
+    </script>
+</body>
+</html>

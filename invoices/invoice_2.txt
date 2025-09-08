@@ -1,0 +1,7 @@
+
+Invoice
+Buyer: rahin
+Seller: sakamoto
+Price: 2500.00
+Contact: fatin@gmail.com
+Location: Mohammadpur

@@ -56,7 +56,7 @@
         </ul>
     </div>
     <div class="content-section">
-        <h2><i class="fas fa-box-open"></i> Take a look at our Inventory (<?php echo $inventoryCount; ?> items)</h2>
+        <h2><i class="fas fa-box-open"></i> Take a look at our Inventory</h2>
         <p>
             <strong>We have a huge collection of merchandise in our inventory. Check it out.</strong>
         </p>
@@ -65,10 +65,7 @@
         </div>   
     </div>
     <div class="qr-links-section">
-        <div class="qr-code">
-            <img src="Untitled 1.png" alt="Scan QR Code" width="150">
-            <p><i class="fas fa-mobile-alt"></i> Scan to visit our mobile site</p>
-        </div>
+
         <div class="important-links">
             <h3><i class="fas fa-link"></i> Important Links:</h3>
             <div class="link-buttons">

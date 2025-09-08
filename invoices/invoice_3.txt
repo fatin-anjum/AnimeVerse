@@ -1,0 +1,7 @@
+INVOICE
+Item title: asd
+Buyer name: rahin
+Seller name: sakamoto
+Price: 213123.00
+Contact: fatin@gmail.com
+Location: Motijheel

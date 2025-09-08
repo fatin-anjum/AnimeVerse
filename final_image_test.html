@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Final Image Loading Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f8f9fa; }
+        .test-container { max-width: 900px; margin: 0 auto; }
+        .test-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin: 30px 0; }
+        
+        .anime-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+            border: 1px solid #e9ecef;
+        }
+        
+        .anime-cover {
+            height: 240px;
+            background: linear-gradient(45deg, #f8f9fa, #e9ecef);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .anime-cover img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            image-rendering: auto;
+        }
+        
+        .anime-cover:hover img { transform: scale(1.05); }
+        
+        .anime-cover .image-fallback {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f1f3f4, #e8eaed);
+        }
+        
+        .anime-cover .no-image {
+            font-size: 4rem;
+            color: #cbd5e0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            width: 100%;
+            height: 100%;
+            justify-content: center;
+        }
+        
+        .anime-cover .no-image .placeholder-text {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 15px;
+            font-weight: 500;
+        }
+        
+        .anime-info { padding: 20px; }
+        .anime-info h3 { margin: 0 0 8px 0; font-size: 1.3rem; color: #2c3e50; }
+        .status { font-size: 0.9rem; color: #6c757d; margin: 5px 0; }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🎯 Final Image Loading Test</h1>
+        <p>Testing the new image loading approach that should prevent false "Image Failed to Load" messages.</p>
+        
+        <div class="test-grid">
+            <!-- Working Image 1 -->
+            <div class="anime-card">
+                <div class="anime-cover">
+                    <img src="https://cdn.myanimelist.net/images/anime/10/47347l.jpg" alt="Attack on Titan">
+                    <div class="image-fallback">
+                        <div class="no-image">
+                            <span>📺</span>
+                            <div class="placeholder-text">Image Failed to Load</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="anime-info">
+                    <h3>Attack on Titan</h3>
+                    <div class="status">✅ Should load successfully</div>
+                </div>
+            </div>
+            
+            <!-- Working Image 2 -->
+            <div class="anime-card">
+                <div class="anime-cover">
+                    <img src="https://cdn.myanimelist.net/images/anime/1286/99889l.jpg" alt="Demon Slayer">
+                    <div class="image-fallback">
+                        <div class="no-image">
+                            <span>📺</span>
+                            <div class="placeholder-text">Image Failed to Load</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="anime-info">
+                    <h3>Demon Slayer</h3>
+                    <div class="status">✅ Should load successfully</div>
+                </div>
+            </div>
+            
+            <!-- Broken Image -->
+            <div class="anime-card">
+                <div class="anime-cover">
+                    <img src="https://invalid-url-should-fail.jpg" alt="Broken Image">
+                    <div class="image-fallback">
+                        <div class="no-image">
+                            <span>📺</span>
+                            <div class="placeholder-text">Image Failed to Load</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="anime-info">
+                    <h3>Broken Image Test</h3>
+                    <div class="status">❌ Should show fallback</div>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 30px;">
+            <h3>✨ Expected Results:</h3>
+            <ul>
+                <li><strong>Attack on Titan & Demon Slayer:</strong> Should show actual images without any error messages</li>
+                <li><strong>Broken Image Test:</strong> Should show "Image Failed to Load" placeholder</li>
+                <li><strong>No false positives:</strong> Working images should never show error messages</li>
+            </ul>
+            
+            <p><strong>🎯 Success Criteria:</strong> If working images show correctly without error messages, the fix is successful!</p>
+        </div>
+    </div>
+    
+    <script>
+        // Simple image error handling (same as in the actual site)
+        document.addEventListener('DOMContentLoaded', function() {
+            const images = document.querySelectorAll('.anime-cover img');
+            images.forEach(function(img) {
+                img.addEventListener('error', function() {
+                    console.log('Image failed to load:', this.src);
+                    this.style.display = 'none';
+                    const fallback = this.nextElementSibling;
+                    if (fallback && fallback.classList.contains('image-fallback')) {
+                        fallback.style.display = 'flex';
+                    }
+                });
+                
+                img.addEventListener('load', function() {
+                    console.log('Image loaded successfully:', this.src);
+                    this.style.display = 'block';
+                    const fallback = this.nextElementSibling;
+                    if (fallback && fallback.classList.contains('image-fallback')) {
+                        fallback.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

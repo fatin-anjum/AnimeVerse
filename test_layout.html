@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anime Review Layout Test</title>
+    <link rel="stylesheet" href="css/animereview.css">
+    <style>
+        /* Additional debug styles */
+        .debug-info {
+            background: #fff3cd;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ffeaa7;
+        }
+        
+        .anime-card {
+            border: 2px solid #3498db !important;
+        }
+        
+        .anime-cover {
+            border: 1px solid #e74c3c !important;
+        }
+    </style>
+</head>
+<body>
+    <div class="anime-review-container">
+        <div class="debug-info">
+            <strong>Layout Debug Test</strong><br>
+            This page tests the anime review layout with sample data.
+        </div>
+        
+        <header class="page-header">
+            <h1>🎌 Anime Reviews & Ratings (Test)</h1>
+            <p>Testing layout and styling</p>
+        </header>
+
+        <div class="content-grid">
+            <main class="main-content">
+                <section class="anime-list-section">
+                    <h2>Sample Anime Grid</h2>
+                    <div class="anime-grid">
+                        <!-- Sample Anime Card 1 -->
+                        <div class="anime-card">
+                            <div class="anime-cover">
+                                <img src="https://cdn.myanimelist.net/images/anime/10/47347.jpg" alt="Attack on Titan">
+                            </div>
+                            <div class="anime-info">
+                                <h3><a href="#">Attack on Titan</a></h3>
+                                <p class="anime-year">2013 • Completed</p>
+                                <div class="rating-info">
+                                    <div class="rating-display">
+                                        <span class="rating-number">8.5</span>
+                                        <div class="stars">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star">★</span>
+                                        </div>
+                                        <span class="review-count">(152 reviews)</span>
+                                    </div>
+                                </div>
+                                <p class="anime-description">Humanity fights for survival against giant humanoid Titans in this epic tale of war and survival...</p>
+                            </div>
+                        </div>
+
+                        <!-- Sample Anime Card 2 -->
+                        <div class="anime-card">
+                            <div class="anime-cover">
+                                <img src="https://cdn.myanimelist.net/images/anime/1286/99889.jpg" alt="Demon Slayer">
+                            </div>
+                            <div class="anime-info">
+                                <h3><a href="#">Demon Slayer</a></h3>
+                                <p class="anime-year">2019 • Ongoing</p>
+                                <div class="rating-info">
+                                    <div class="rating-display">
+                                        <span class="rating-number">9.2</span>
+                                        <div class="stars">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                        </div>
+                                        <span class="review-count">(89 reviews)</span>
+                                    </div>
+                                </div>
+                                <p class="anime-description">A young boy becomes a demon slayer to save his sister in this beautifully animated adventure...</p>
+                            </div>
+                        </div>
+
+                        <!-- Sample Anime Card 3 -->
+                        <div class="anime-card">
+                            <div class="anime-cover">
+                                <img src="https://cdn.myanimelist.net/images/anime/6/73245.jpg" alt="One Piece">
+                            </div>
+                            <div class="anime-info">
+                                <h3><a href="#">One Piece</a></h3>
+                                <p class="anime-year">1999 • Ongoing</p>
+                                <div class="rating-info">
+                                    <div class="rating-display">
+                                        <span class="rating-number">7.8</span>
+                                        <div class="stars">
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star filled">★</span>
+                                            <span class="star">★</span>
+                                        </div>
+                                        <span class="review-count">(234 reviews)</span>
+                                    </div>
+                                </div>
+                                <p class="anime-description">Monkey D. Luffy searches for the legendary treasure One Piece in this epic pirate adventure...</p>
+                            </div>
+                        </div>
+
+                        <!-- Sample with broken image -->
+                        <div class="anime-card">
+                            <div class="anime-cover">
+                                <img src="broken-image-url.jpg" alt="Test Broken Image" 
+                                     onerror="this.style.display='none'; this.parentNode.innerHTML='<div class=\"no-image\"><span>📺</span><div class=\"placeholder-text\">Image Not Available</div></div>';">
+                            </div>
+                            <div class="anime-info">
+                                <h3><a href="#">Test Broken Image</a></h3>
+                                <p class="anime-year">2024 • Test</p>
+                                <div class="rating-info">
+                                    <p class="no-rating">No ratings yet</p>
+                                </div>
+                                <p class="anime-description">This card tests the fallback for broken images...</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <aside class="sidebar">
+                <section class="recent-reviews">
+                    <h3>Recent Reviews</h3>
+                    <div class="review-list">
+                        <div class="review-item">
+                            <div class="review-header">
+                                <span class="username">TestUser</span>
+                                <span class="rating">9/10</span>
+                            </div>
+                            <div class="anime-title">Attack on Titan</div>
+                            <div class="review-preview">Amazing series with incredible character development...</div>
+                        </div>
+                    </div>
+                </section>
+            </aside>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,18 @@
+RewriteEngine On
+
+# Allow CSS, JS, and image files to be served directly
+RewriteCond %{REQUEST_FILENAME} \.(css|js|png|jpg|jpeg|gif|ico|svg)$ [NC]
+RewriteRule ^(.*)$ - [L]
+
+# Prevent any automatic redirects to dashboard
+RewriteCond %{THE_REQUEST} ^[A-Z]{3,}\s/Animeverse/?\s [NC]
+RewriteRule ^$ index.php [L]
+
+# Handle missing page parameter
+RewriteCond %{QUERY_STRING} !page=
+RewriteRule ^index\.php$ index.php?page=home [L]
+
+# Ensure all requests go to index.php with proper routing
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*)$ index.php [QSA,L]
