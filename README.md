@@ -98,11 +98,8 @@
    -- Create database
    CREATE DATABASE animeverse;
    
-   -- Import schema and data
+   -- Import complete schema with sample data
    mysql -u root -p animeverse < animeverse.sql
-   
-   -- Apply feature updates (if needed)
-   mysql -u root -p animeverse < database_updates.sql
    ```
 
 3. **Configure database connection**
@@ -116,12 +113,20 @@
 
 4. **Deploy to web server**
    - Copy files to your web server directory (e.g., `htdocs` for XAMPP)
-   - Ensure proper file permissions
+   - Ensure proper file permissions for upload directories
 
 5. **Access the application**
    ```
    http://localhost/animeverse/
    ```
+
+### **Features Ready Out of the Box**
+- ✅ **Sample anime database** with 5 popular anime titles
+- ✅ **Test user accounts** with existing content
+- ✅ **Active reviews and ratings** (11 sample reviews)
+- ✅ **Working badge system** with earned achievements
+- ✅ **Experience points** and level progression
+- ✅ **Community content** (discussions, fanart, collectibles)
 
 ## 📁 Project Structure
 
@@ -190,8 +195,7 @@ AnimeVerse/
 ├── 📄 index.php            # Front controller and entry point
 ├── 📄 db.php               # Database connection configuration
 ├── 📄 auth.php             # Authentication utilities
-├── 📄 animeverse.sql       # Database schema and initial data
-├── 📄 database_updates.sql # Feature updates and enhancements
+├── 📄 animeverse.sql       # Complete database schema with all features and sample data
 └── 📄 README.md            # Project documentation
 ```
 
@@ -203,6 +207,15 @@ AnimeVerse/
 3. **Engage**: Participate in polls, write reviews, and join debates
 4. **Collect**: Trade virtual collectibles and earn experience points
 5. **Connect**: Follow other users and build your anime community
+
+### **Test Accounts Available**
+For testing purposes, the database includes several pre-configured accounts:
+- **Username**: `sakamoto` | **Email**: `sakamoto123@gmail.com`
+- **Username**: `rahin` | **Email**: `fatin@gmail.com`
+- **Username**: `gojo satoru` | **Email**: `gojo@gmail.com`
+- **Username**: `naruto` | **Email**: `naruto@gmail.com`
+
+*Note: Use the forgot password feature or create new accounts as needed.*
 
 ### **Key Pages**
 - **Home**: `/?page=home` - Dashboard and recent activity
@@ -218,17 +231,21 @@ AnimeVerse/
 
 ### **Core Tables**
 - `users` - User accounts and profiles
+- `anime` - Complete anime database with metadata and cover images
 - `fanart` - Fan art submissions and metadata
 - `genre_discussions` - Discussion threads by anime genre
 - `polls` & `debates` - Voting and debate systems
 - `collectibles` - Virtual marketplace items
-- `reviews` - Anime reviews and ratings
+- `reviews` - Anime reviews and ratings with spoiler support
+- `genres` - Anime genre categories
 
-### **Social Features**
-- `follows` - User relationship tracking
-- `user_badges` - Achievement system
-- `user_experience` - Gamification and XP tracking
-- `spoiler_tags` - Content spoiler management
+### **Advanced Features**
+- `follows` - User relationship tracking and social networking
+- `user_badges` - Achievement and gamification system
+- `user_experience` - XP tracking and level progression
+- `spoiler_tags` - Comprehensive content spoiler management
+- `badge_visibility_preferences` - Customizable badge display settings
+- `anime_genres` - Many-to-many relationship between anime and genres
 
 ### **Entity Relationships**
 ```mermaid
@@ -240,6 +257,12 @@ graph TB
     Users --> |M:N| Follows[follows]
     Users --> |1:N| Badges[user_badges]
     Users --> |1:N| Experience[user_experience]
+    Anime[anime] --> |1:N| Reviews[reviews]
+    Anime --> |M:N| Genres[anime_genres]
+    Genres[genres] --> |1:N| Discussions[genre_discussions]
+    SpoilerTags[spoiler_tags] -.-> |References| Reviews
+    SpoilerTags -.-> |References| FanArt
+    SpoilerTags -.-> |References| Discussions
 ```
 
 ## 🎨 Design Philosophy
